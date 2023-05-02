@@ -1,6 +1,9 @@
-pub const HOST: &str = "127.0.0.1:6767";
+pub const HOST: &str = "0.0.0.0:6767";
 pub const SERVER_RUNNING_STATUS: &str = "server is running";
 pub const DELETE_OK_STATUS: &str = "deleted ok";
+
+pub const PAGINATION_DEFAULT_PAGE_NUMBER: i64 = 0;
+pub const PAGINATION_DEFAULT_PAGE_SIZE: i64 = 30;
 
 /**
  * Unit test cases

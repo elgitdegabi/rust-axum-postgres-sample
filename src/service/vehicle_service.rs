@@ -1,11 +1,12 @@
 use log::info;
 
+use crate::config::pagination::Pagination;
 use crate::model::vehicle::{Vehicle, VehicleUpsert};
 use crate::repository::*;
 
-pub fn get_vehicles() -> Vec<Vehicle> {
+pub fn get_vehicles(pagination: Pagination) -> Vec<Vehicle> {
     info!("vehicle_service - get_vehicles - executed");
-    vehicle_repository::get_vehicles()
+    vehicle_repository::get_vehicles(pagination)
 }
 
 pub fn get_vehicle(vehicle_id: i64) -> Vehicle {

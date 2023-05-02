@@ -5,11 +5,15 @@ use log::info;
 
 use crate::config::constants::DELETE_OK_STATUS;
 use crate::config::database::get_pool_connection;
+use crate::config::pagination::Pagination;
 use crate::model::vehicle::{Vehicle, VehicleUpsert};
 use crate::schema;
 
-pub fn get_vehicles() -> Vec<Vehicle> {
-    let result = vehicle.get_results::<Vehicle>(&mut get_pool_connection());
+pub fn get_vehicles(pagination: Pagination) -> Vec<Vehicle> {
+    let result = vehicle
+        .limit(pagination.per_page)
+        .offset(pagination.page)
+        .get_results::<Vehicle>(&mut get_pool_connection());
     info!("vehicle_repository - get_vehicles - executed");
 
     result.unwrap()

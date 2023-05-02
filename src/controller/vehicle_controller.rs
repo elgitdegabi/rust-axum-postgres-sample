@@ -1,17 +1,18 @@
 use axum::{
-    extract::Path,
+    extract::{Path, Query},
     response::IntoResponse,
     routing::{get, post},
     Json, Router,
 };
 use serde_json::json;
 
+use crate::config::pagination::Pagination;
 use crate::model::vehicle::VehicleUpsert;
 use crate::service::vehicle_service::*;
 
 pub fn config_endpoints() -> Router {
-    async fn map_get_vehicles() -> impl IntoResponse {
-        format!("{}", json!(get_vehicles()))
+    async fn map_get_vehicles(pagination: Option<Query<Pagination>>) -> impl IntoResponse {
+        format!("{}", json!(get_vehicles(pagination.unwrap_or_default().0)))
     }
 
     async fn map_get_vehicle(Path(vehicle_id): Path<i64>) -> impl IntoResponse {

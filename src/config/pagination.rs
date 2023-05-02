@@ -1,6 +1,23 @@
-pub const HOST: &str = "127.0.0.1:6767";
-pub const SERVER_RUNNING_STATUS: &str = "server is running";
-pub const DELETE_OK_STATUS: &str = "deleted ok";
+use serde::Deserialize;
+
+use crate::config::constants::{PAGINATION_DEFAULT_PAGE_NUMBER, PAGINATION_DEFAULT_PAGE_SIZE};
+
+/// based on https://docs.rs/axum/latest/axum/extract/struct.Query.html
+#[derive(Deserialize)]
+pub struct Pagination {
+    pub page: i64,
+    pub per_page: i64,
+}
+
+// TODO use constants
+impl Default for Pagination {
+    fn default() -> Self {
+        Self {
+            page: PAGINATION_DEFAULT_PAGE_NUMBER,
+            per_page: PAGINATION_DEFAULT_PAGE_SIZE,
+        }
+    }
+}
 
 /**
  * Unit test cases
