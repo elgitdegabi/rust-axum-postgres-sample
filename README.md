@@ -117,12 +117,12 @@ docker compose --env-file=./docker/local-environment.env -f ./docker/docker-comp
 * start your docker desktop agent
 * IMPORTANT: you should set / export DATABASE_URL environment variable
 ```
-docker build -t rust-axum-postgres-api-sample .
+docker build -t rust-axum-postgres-api-sample:latest .
 ```
 ### image run
 * start your docker desktop agent
 ```
-docker run -p 6767:6767 --env-file ./docker/local-environment.env rust-axum-postgres-api-sample
+docker run -p 6767:6767 --env-file ./docker/local-environment.env rust-axum-postgres-api-sample:latest
 ```
 
 ## Run locally from command line
@@ -170,7 +170,6 @@ cargo clippy
 #### set PG path
 * setx PQ_LIB_DIR "[YOUR_POSTGRES_INSTALLATION_PATH]\lib"
 * https://stackoverflow.com/questions/62708607/how-to-fix-diesel-cli-link-libpq-lib-error-with-postgres-tools-installed-in-dock
-* add PQ_LIB_DIR to your PATH environment variable
 * add PQ_BIN_DIR to your PATH environment variable
 * https://taharmeijs.medium.com/diesel-rs-postgresql-linking-errors-on-windows-b769586664c1
 #### reboot and execute clean cargo
