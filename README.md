@@ -122,7 +122,7 @@ docker build -t rust-axum-postgres-api-sample:latest .
 ### image run
 * start your docker desktop agent
 ```
-docker run -p 127.0.0.1:6767:6767 --env-file ./docker/local-environment.env rust-axum-postgres-api-sample:latest
+docker run -p 0.0.0.0:6767:6767 --env-file ./docker/local-environment.env rust-axum-postgres-api-sample:latest
 ```
 
 ## Run locally from command line

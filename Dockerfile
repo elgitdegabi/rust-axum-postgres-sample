@@ -14,7 +14,8 @@ COPY . .
 RUN cargo install --path .
 
 FROM debian:buster-slim
-RUN apt-get update && apt-get install -y --no-install-recommends build-essential libpq-dev extra-runtime-dependencies & rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends build-essential libpq-dev
+RUN apt-get install -y extra-runtime-dependencies & rm -rf /var/lib/apt/lists/*
 COPY --from=builder /log/config/logging_config.yaml /log/config/logging_config.yaml
 COPY --from=builder /usr/local/cargo/bin/rust-axum-postgres-api-sample /usr/local/bin/rust-axum-postgres-api-sample
 CMD ["rust-axum-postgres-api-sample"]
