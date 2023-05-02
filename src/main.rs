@@ -1,5 +1,5 @@
 use crate::config::constants::HOST;
-use crate::controller::user_controller::config_endpoints;
+use crate::controller::*;
 
 use config::database::*;
 use dotenv::dotenv;
@@ -29,7 +29,12 @@ async fn main() {
 
     info!("Axum server - starting...");
     axum::Server::bind(&HOST.parse().unwrap())
-        .serve(config_endpoints().into_make_service())
+        .serve(
+            health_controller::config_endpoints()
+                .merge(user_controller::config_endpoints())
+                .merge(vehicle_controller::config_endpoints())
+                .into_make_service(),
+        )
         .await
         .unwrap();
 }

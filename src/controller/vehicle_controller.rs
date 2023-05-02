@@ -6,51 +6,39 @@ use axum::{
 };
 use serde_json::json;
 
-use crate::config::constants::*;
-use crate::model::health::Health;
-use crate::model::user::UserUpsert;
-use crate::service::user_service::*;
+use crate::model::vehicle::VehicleUpsert;
+use crate::service::vehicle_service::*;
 
 pub fn config_endpoints() -> Router {
-    async fn map_health() -> impl IntoResponse {
-        format!(
-            "{}",
-            json!(Health {
-                status: String::from(SERVER_RUNNING_STATUS)
-            })
-        )
+    async fn map_get_vehicles() -> impl IntoResponse {
+        format!("{}", json!(get_vehicles()))
     }
 
-    async fn map_get_users() -> impl IntoResponse {
-        format!("{}", json!(get_users()))
+    async fn map_get_vehicle(Path(vehicle_id): Path<i64>) -> impl IntoResponse {
+        format!("{}", json!(get_vehicle(vehicle_id)))
     }
 
-    async fn map_get_user(Path(user_id): Path<i64>) -> impl IntoResponse {
-        format!("{}", json!(get_user(user_id)))
+    async fn map_add_vehicle(vehicle: Json<VehicleUpsert>) -> impl IntoResponse {
+        format!("{}", json!(add_vehicle(vehicle.0)))
     }
 
-    async fn map_add_user(user: Json<UserUpsert>) -> impl IntoResponse {
-        format!("{}", json!(add_user(user.0)))
-    }
-
-    async fn map_update_user(
-        Path(user_id): Path<i64>,
-        user: Json<UserUpsert>,
+    async fn map_update_vehicle(
+        Path(vehicle_id): Path<i64>,
+        vehicle: Json<VehicleUpsert>,
     ) -> impl IntoResponse {
-        format!("{}", json!(update_user(user_id, user.0)))
+        format!("{}", json!(update_vehicle(vehicle_id, vehicle.0)))
     }
 
-    async fn map_delete_user(Path(user_id): Path<i64>) -> impl IntoResponse {
-        format!("{}", json!(delete_user(user_id)))
+    async fn map_delete_vehicle(Path(vehicle_id): Path<i64>) -> impl IntoResponse {
+        format!("{}", json!(delete_vehicle(vehicle_id)))
     }
 
     Router::new()
-        .route("/health", get(map_health))
-        .route("/users", get(map_get_users))
-        .route("/user/:userid", get(map_get_user))
-        .route("/user/add", post(map_add_user))
-        .route("/user/update/:userid", post(map_update_user))
-        .route("/user/delete/:userid", post(map_delete_user))
+        .route("/vehicles", get(map_get_vehicles))
+        .route("/vehicle/:vehicleid", get(map_get_vehicle))
+        .route("/vehicle/add", post(map_add_vehicle))
+        .route("/vehicle/update/:vehicleid", post(map_update_vehicle))
+        .route("/vehicle/delete/:vehicleid", post(map_delete_vehicle))
 }
 
 /**

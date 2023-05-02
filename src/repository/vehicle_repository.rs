@@ -1,64 +1,63 @@
-use self::schema::user_data::dsl::*;
+use self::schema::vehicle::dsl::*;
 use diesel::prelude::*;
 use diesel::{QueryDsl, RunQueryDsl};
 use log::info;
 
 use crate::config::constants::DELETE_OK_STATUS;
 use crate::config::database::get_pool_connection;
-use crate::model::user::User;
-use crate::model::user::UserUpsert;
+use crate::model::vehicle::{Vehicle, VehicleUpsert};
 use crate::schema;
 
-pub fn get_users() -> Vec<User> {
-    let result = user_data.get_results::<User>(&mut get_pool_connection());
-    info!("user_repository - get_users - executed");
+pub fn get_vehicles() -> Vec<Vehicle> {
+    let result = vehicle.get_results::<Vehicle>(&mut get_pool_connection());
+    info!("vehicle_repository - get_vehicles - executed");
 
     result.unwrap()
 }
 
-pub fn get_user(user_id_value: i64) -> User {
-    let result = user_data
-        .filter(user_id.eq(user_id_value))
-        .get_result::<User>(&mut get_pool_connection());
+pub fn get_vehicle(vehicle_id_value: i64) -> Vehicle {
+    let result = vehicle
+        .filter(vehicle_id.eq(vehicle_id_value))
+        .get_result::<Vehicle>(&mut get_pool_connection());
     info!(
-        "user_repository - get_user - executed for user id: {}",
-        user_id_value
+        "vehicle_repository - get_vehicle - executed for vehicle id: {}",
+        vehicle_id_value
     );
 
     result.unwrap()
 }
 
-pub fn add_user(user_to_add: UserUpsert) -> User {
+pub fn add_vehicle(vehicle_to_add: VehicleUpsert) -> Vehicle {
     info!(
-        "user_repository - add_user - executed for user: {:?}",
-        user_to_add
+        "vehicle_repository - add_vehicle - executed for vehicle: {:?}",
+        vehicle_to_add
     );
-    diesel::insert_into(user_data)
-        .values(&user_to_add)
+    diesel::insert_into(vehicle)
+        .values(&vehicle_to_add)
         .get_result(&mut get_pool_connection())
-        .expect("add_user execution fails")
+        .expect("add_vehicle execution fails")
 }
 
-pub fn update_user(user_id_value: i64, user_to_update: UserUpsert) -> User {
+pub fn update_vehicle(vehicle_id_value: i64, vehicle_to_update: VehicleUpsert) -> Vehicle {
     info!(
-        "user_repository - update_user - executed for user id: {} - user: {:?}",
-        user_id_value, user_to_update
+        "vehicle_repository - update_vehicle - executed for vehicle id: {} - vehicle: {:?}",
+        vehicle_id_value, vehicle_to_update
     );
-    diesel::update(user_data)
-        .filter(user_id.eq(user_id_value))
-        .set(&user_to_update)
+    diesel::update(vehicle)
+        .filter(vehicle_id.eq(vehicle_id_value))
+        .set(&vehicle_to_update)
         .get_result(&mut get_pool_connection())
-        .expect("update_user execution fails")
+        .expect("update_vehicle execution fails")
 }
 
-pub fn delete_user(user_id_value: i64) -> String {
-    diesel::delete(user_data)
-        .filter(user_id.eq(user_id_value))
+pub fn delete_vehicle(vehicle_id_value: i64) -> String {
+    diesel::delete(vehicle)
+        .filter(vehicle_id.eq(vehicle_id_value))
         .execute(&mut get_pool_connection())
-        .expect("delete_user execution fails");
+        .expect("delete_vehicle execution fails");
     info!(
-        "user_repository - delete_user - executed for user id: {}",
-        user_id_value
+        "vehicle_repository - delete_vehicle - executed for vehicle id: {}",
+        vehicle_id_value
     );
 
     String::from(DELETE_OK_STATUS)
@@ -73,60 +72,60 @@ mod tests {
 
     /**
      * Scenario:
-     * Executes get_users with valid parameters
+     * Executes get_vehicles with valid parameters
      * Expectation:
-     * A list of users should be retrieved
+     * A list of vehicle should be retrieved
      */
     #[test]
-    fn when_get_users_with_valid_parameters_should_return_user_list() {
+    fn when_get_vehicles_with_valid_parameters_should_return_vehicle_list() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes get_user with valid parameters
+     * Executes get_vehicle with valid parameters
      * Expectation:
-     * An user should be retrieved
+     * An vehicle should be retrieved
      */
     #[test]
-    fn when_get_user_with_valid_parameters_should_return_user() {
+    fn when_get_vehicle_with_valid_parameters_should_return_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes add_user with valid parameters
+     * Executes add_vehicle with valid parameters
      * Expectation:
-     * An user should be created
+     * An vehicle should be created
      */
     #[test]
-    fn when_add_user_with_valid_parameters_should_create_user() {
+    fn when_add_vehicle_with_valid_parameters_should_create_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes update_user with valid parameters
+     * Executes update_vehicle with valid parameters
      * Expectation:
-     * An user should be updated
+     * An vehicle should be updated
      */
     #[test]
-    fn when_update_user_with_valid_parameters_should_update_user() {
+    fn when_update_vehicle_with_valid_parameters_should_update_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes delete_user with valid parameters
+     * Executes delete_vehicle with valid parameters
      * Expectation:
-     * An user should be deleted
+     * An vehicle should be deleted
      */
     #[test]
-    fn when_delete_user_with_valid_parameters_should_delete_user() {
+    fn when_delete_vehicle_with_valid_parameters_should_delete_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }

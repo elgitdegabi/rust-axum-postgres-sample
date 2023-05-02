@@ -6,21 +6,10 @@ use axum::{
 };
 use serde_json::json;
 
-use crate::config::constants::*;
-use crate::model::health::Health;
 use crate::model::user::UserUpsert;
 use crate::service::user_service::*;
 
 pub fn config_endpoints() -> Router {
-    async fn map_health() -> impl IntoResponse {
-        format!(
-            "{}",
-            json!(Health {
-                status: String::from(SERVER_RUNNING_STATUS)
-            })
-        )
-    }
-
     async fn map_get_users() -> impl IntoResponse {
         format!("{}", json!(get_users()))
     }
@@ -45,7 +34,6 @@ pub fn config_endpoints() -> Router {
     }
 
     Router::new()
-        .route("/health", get(map_health))
         .route("/users", get(map_get_users))
         .route("/user/:userid", get(map_get_user))
         .route("/user/add", post(map_add_user))

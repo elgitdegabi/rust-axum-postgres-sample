@@ -10,3 +10,15 @@ diesel::table! {
         user_update_ts -> Nullable<Timestamptz>,
     }
 }
+
+diesel::table! {
+    vehicle (vehicle_id) {
+        vehicle_id -> BigInt,
+        vin -> Text,
+        license_plate -> Text,
+        status -> Text,
+        vehicle_type -> Text,
+        vehicle_date -> Timestamptz,
+        vehicle_update -> Timestamptz,
+    }
+}

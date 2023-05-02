@@ -1,40 +1,43 @@
 use log::info;
 
-use crate::model::user::{User, UserUpsert};
+use crate::model::vehicle::{Vehicle, VehicleUpsert};
 use crate::repository::*;
 
-pub fn get_users() -> Vec<User> {
-    info!("user_service - get_users - executed");
-    user_repository::get_users()
+pub fn get_vehicles() -> Vec<Vehicle> {
+    info!("vehicle_service - get_vehicles - executed");
+    vehicle_repository::get_vehicles()
 }
 
-pub fn get_user(user_id: i64) -> User {
+pub fn get_vehicle(vehicle_id: i64) -> Vehicle {
     info!(
-        "user_service - get_user - executed for user id: {}",
-        user_id
+        "vehicle_service - get_vehicle - executed for vehicle id: {}",
+        vehicle_id
     );
-    user_repository::get_user(user_id)
+    vehicle_repository::get_vehicle(vehicle_id)
 }
 
-pub fn add_user(user: UserUpsert) -> User {
-    info!("user_service - add_user - executed for user: {:?}", user);
-    user_repository::add_user(user)
-}
-
-pub fn update_user(user_id: i64, user: UserUpsert) -> User {
+pub fn add_vehicle(vehicle: VehicleUpsert) -> Vehicle {
     info!(
-        "user_service - update_user - executed for user id: {} - user: {:?}",
-        user_id, user
+        "vehicle_service - add_vehicle - executed for vehicle: {:?}",
+        vehicle
     );
-    user_repository::update_user(user_id, user)
+    vehicle_repository::add_vehicle(vehicle)
 }
 
-pub fn delete_user(user_id: i64) -> String {
+pub fn update_vehicle(vehicle_id: i64, vehicle: VehicleUpsert) -> Vehicle {
     info!(
-        "user_service - delete_user - executed for user id: {}",
-        user_id
+        "vehicle_service - update_vehicle - executed for vehicle id: {} - vehicle: {:?}",
+        vehicle_id, vehicle
     );
-    user_repository::delete_user(user_id)
+    vehicle_repository::update_vehicle(vehicle_id, vehicle)
+}
+
+pub fn delete_vehicle(vehicle_id: i64) -> String {
+    info!(
+        "vehicle_service - delete_vehicle - executed for vehicle id: {}",
+        vehicle_id
+    );
+    vehicle_repository::delete_vehicle(vehicle_id)
 }
 
 /**
@@ -46,60 +49,60 @@ mod tests {
 
     /**
      * Scenario:
-     * Executes get_users with valid parameters
+     * Executes get_vehicles with valid parameters
      * Expectation:
-     * A list of users should be retrieved
+     * A list of vehicles should be retrieved
      */
     #[test]
-    fn when_get_users_with_valid_parameters_should_return_user_list() {
+    fn when_get_vehicles_with_valid_parameters_should_return_vehicle_list() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes get_user with valid parameters
+     * Executes get_vehicle with valid parameters
      * Expectation:
-     * An user should be retrieved
+     * An vehicle should be retrieved
      */
     #[test]
-    fn when_get_user_with_valid_parameters_should_return_user() {
+    fn when_get_vehicle_with_valid_parameters_should_return_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes add_user with valid parameters
+     * Executes add_vehicle with valid parameters
      * Expectation:
-     * An user should be created
+     * An vehicle should be created
      */
     #[test]
-    fn when_add_user_with_valid_parameters_should_create_user() {
+    fn when_add_vehicle_with_valid_parameters_should_create_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes update_user with valid parameters
+     * Executes update_vehicle with valid parameters
      * Expectation:
-     * An user should be updated
+     * An vehicle should be updated
      */
     #[test]
-    fn when_update_user_with_valid_parameters_should_update_user() {
+    fn when_update_vehicle_with_valid_parameters_should_update_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
 
     /**
      * Scenario:
-     * Executes delete_user with valid parameters
+     * Executes delete_vehicle with valid parameters
      * Expectation:
-     * An user should be deleted
+     * An vehicle should be deleted
      */
     #[test]
-    fn when_delete_user_with_valid_parameters_should_delete_user() {
+    fn when_delete_vehicle_with_valid_parameters_should_delete_vehicle() {
         // TODO to be implemented
         assert_eq!(true, true);
     }
