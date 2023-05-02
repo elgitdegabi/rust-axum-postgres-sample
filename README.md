@@ -122,7 +122,7 @@ docker build -t rust-axum-postgres-api-sample:latest .
 ### image run
 * start your docker desktop agent
 ```
-docker run -p 6767:6767 --env-file ./docker/local-environment.env rust-axum-postgres-api-sample:latest
+docker run -p 127.0.0.1:6767:6767 --env-file ./docker/local-environment.env rust-axum-postgres-api-sample:latest
 ```
 
 ## Run locally from command line
@@ -193,6 +193,10 @@ cargo clippy
 #### important tips, tricks and comments:
 * Diesel 2 - migration and changelog: https://github.com/diesel-rs/diesel/blob/5d78e38d21f8184dbbb73a0ecb714a204186c67d/guide_drafts/migration_guide.md
 
+#### implement ORM pagination
+* https://docs.rs/axum/latest/axum/extract/struct.Query.html
+* https://stackoverflow.com/questions/74891118/how-to-use-both-axumextractquery-and-axumextractstate-with-axum
+
 ### Unit tests
 * https://doc.rust-lang.org/book/ch11-01-writing-tests.html
 #### execute test suites
@@ -216,3 +220,7 @@ cargo clippy
 #### execute test suites
 * cargo test --test integration_test
 * alternative: cargo test (full unit and integration tests execution)
+
+### API swagger documentation
+* https://www.youtube.com/watch?v=wlNQvJ6i2nA
+* 

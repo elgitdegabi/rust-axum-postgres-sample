@@ -3,6 +3,7 @@ services:
   postgres-db:
     image: postgres
     restart: always
+    hostname: postgres-db
     environment:
       POSTGRES_DB: $POSTGRES_DB
       POSTGRES_USER: $POSTGRES_USER
